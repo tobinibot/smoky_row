@@ -4,13 +4,3 @@
   there are
   %strong= @donors.count
   = "donor".pluralize(@donors.count)
-
-%table.table
-  %thead
-    %tr
-      %th Donor
-  %tbody
-    - @donors.each do |donor|
-      %tr
-        %td= donor.name
-

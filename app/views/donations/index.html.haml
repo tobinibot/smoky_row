@@ -1,0 +1,25 @@
+#donations
+  .row
+    .col-sm
+      %h3 Donations
+
+  .row
+    .col-sm
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Date
+            %th Name
+            %th Amount
+            %th Tax Deductible
+
+
+        %tbody
+          - @donations.each do |donation|
+            %tr
+              %td= donation.date.strftime('%b %e %Y')
+              %td= donation.donor.name
+              %td{style: "font-family: 'JetBrains Mono';"}= number_to_currency(donation.amount)
+              %td
+                - if donation.tax_deductible
+                  %i.bi.bi-check
