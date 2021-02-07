@@ -11,8 +11,8 @@
             %th Date
             %th Name
             %th Amount
+            %th Account
             %th Tax Deductible
-
 
         %tbody
           - @donations.each do |donation|
@@ -20,6 +20,7 @@
               %td= donation.date.strftime('%b %e %Y')
               %td= donation.donor.name
               %td{style: "font-family: 'JetBrains Mono';"}= number_to_currency(donation.amount)
+              %td= donation.account
               %td
                 - if donation.tax_deductible
                   %i.bi.bi-check

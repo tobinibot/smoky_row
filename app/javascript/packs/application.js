@@ -8,8 +8,15 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+// pull in the application.scss so CSS is in WebPack
 import "../stylesheets/application";
+
+import '@popperjs/core'
+import 'bootstrap'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+
+import './app'
+
 
 Rails.start()
 Turbolinks.start()
