@@ -1,0 +1,37 @@
+#edit-donor
+  .row
+    .col-sm
+      %h4 Modify donor
+
+  = form_with model: @donor do |f|
+    .row.mb-3
+      .col-sm
+        .form-floating
+          = f.text_field :name, class: 'form-control', placeholder: 'Name', autofocus: true
+          = f.label :name, class: 'form-label'
+
+    .row.mb-3
+      .col-8
+        .form-floating
+          = f.text_field :address1, class: 'form-control', placeholder: 'Address 1'
+          = f.label :address1, class: 'form-label'
+      .col-4
+        .form-floating
+          = f.text_field :address2, class: 'form-control', placeholder: 'Address 2'
+          = f.label :address2, class: 'form-label'
+
+    .row.mb-3
+      .col-4
+        .form-floating
+          = f.text_field :city, class: 'form-control', placeholder: 'City'
+          = f.label :city, class: 'form-label'
+      .col-4
+        .form-floating
+          = f.select :state, options_for_select(us_states), {include_blank: true}, class: 'form-select', placeholder: 'State'
+          = f.label :state, class: 'form-label'
+      .col-4
+        .form-floating
+          = f.text_field :zip, class: 'form-control', placeholder: 'Zip code'
+          = f.label :zip, class: 'form-label'
+
+    = f.submit 'Save' , class: 'btn btn-primary'

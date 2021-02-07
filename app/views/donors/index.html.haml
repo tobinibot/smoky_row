@@ -5,11 +5,16 @@
 
   .row
     .col-sm
+      %a.btn.btn-outline-primary{href: new_donor_path} Add a new donor
+
+  .row
+    .col-sm
       %table.table.table-striped
         %thead
           %tr
             %th Name
             %th Address
+            %th
 
         %tbody
           - @donors.each do |donor|
@@ -22,3 +27,5 @@
                   = donor.city
                   = donor.state
                   = donor.zip
+              %td{style: 'text-align: right;'}
+                %a.btn.btn-outline-primary.btn-sm{href: edit_donor_path(donor)} Edit
