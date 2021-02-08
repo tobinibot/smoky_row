@@ -1,0 +1,43 @@
+#new-donation
+  .row
+    .col-sm
+      %h4 Modify donation
+
+  = form_with model: @donation do |f|
+    .row.mb-3
+      .col-4
+        .form-floating
+          = f.text_field :date, class: 'form-control', placeholder: 'Date'
+          = f.label :date, class: 'form-label'
+      .col-8
+        .form-floating
+          = f.select :donor_id, options_for_select(@donors, @donation.donor.id), {}, class: 'form-select', placeholder: 'Donor'
+          = f.label :donor_id, class: 'form-label'
+
+    .row.mb-3
+      .col-4
+        .form-floating
+          = f.text_field :amount, class: 'form-control', placeholder: 'Amount'
+          = f.label :amount, class: 'form-label'
+      .col-4
+        .form-floating
+          = f.text_field :method, value: 'Check', class: 'form-control', placeholder: 'Method'
+          = f.label :method, class: 'form-label'
+      .col-4
+        .form-floating
+          = f.text_field :account, class: 'form-control', placeholder: 'Account'
+          = f.label :account, class: 'form-label'
+
+    .row.mb-3
+      .col
+        .form-floating
+          = f.text_field :memo, class: 'form-control', placeholder: 'Memo'
+          = f.label :memo, class: 'form-label'
+
+    .row.mb-3
+      .col
+        .form-check.form-switch
+          = f.check_box :tax_deductible, class: 'form-check-input'
+          = f.label :tax_deductible, "This donation is tax deductible", class: 'form-check-label'
+
+    = f.submit 'Save' , class: 'btn btn-primary'

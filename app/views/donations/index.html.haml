@@ -1,7 +1,11 @@
 #donations
   .row
-    .col-sm
+    .col
       %h3 Donations
+
+  .row
+    .col
+      %a.btn.btn-outline-primary{href: new_donation_path} Add a new donation
 
   .row
     .col-sm
@@ -13,6 +17,7 @@
             %th Amount
             %th Account
             %th Tax Deductible
+            %th
 
         %tbody
           - @donations.each do |donation|
@@ -24,3 +29,5 @@
               %td
                 - if donation.tax_deductible
                   %i.bi.bi-check
+              %td{style: 'text-align: right'}
+                %a.btn.btn-outline-primary.btn-sm{href: edit_donation_path(donation)} Edit
