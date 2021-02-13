@@ -1,0 +1,23 @@
+#statements
+  .row
+    .col
+      %h3 Statements
+
+  .row
+    .col
+      %p You can generate giving statements for individual donors or for everyone at once.
+
+  = form_with url: "/statements/generate", method: :get do |f|
+    .row.mb-3
+      .col-4
+        .form-floating
+          = f.select :year, options_for_select([2020, 2021]), {}, class: 'form-select', placeholder: 'Year'
+          = f.label :year, class: 'form-label'
+      .col-6
+        .form-floating
+          = f.select :donor_id, options_for_select(@donors), {}, class: 'form-select', placeholder: 'Donor'
+          = f.label :donor_id, class: 'form-label'
+
+    .row
+      .col
+        = f.submit 'Generate' , class: 'btn btn-primary'

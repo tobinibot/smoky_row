@@ -1,0 +1,192 @@
+!!! 5
+%html
+  %head
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+
+    %link{href: 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap', rel: :stylesheet}
+
+    :css
+      body {
+          font-family: 'Open Sans', sans-serif;
+          font-size: 10pt;
+      }
+
+      h1 {
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+
+      h2 {
+        margin-bottom: 0;
+      }
+
+      h4 {
+        margin-top: 0;
+      }
+
+      .normal-text {
+        font-weight: 400;
+      }
+
+      .donor {
+        margin-bottom: 2em;
+      }
+
+      .grid-wrapper {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        column-gap: 10px;
+      }
+
+      .donations table {
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        border: 1px solid #999;
+      }
+
+      .donations table thead th, table tbody td {
+        border-bottom: 1px solid #ccc;
+      }
+
+      .donations table tbody tr.has-memo td {
+        border-bottom: none;
+      }
+
+      .donations table tbody tr:last-child td{
+        border-bottom: none;
+      }
+
+      .donations thead tr th {
+        text-align: left;
+      }
+
+      .donations tbody tr.shaded td {
+        background: #eee;
+      }
+
+      .donations th, td {
+        padding: 6px;
+      }
+
+      .donations tr.has-memo td {
+        padding-bottom: 0;
+      }
+
+      .donations td.memo {
+        padding-top: 0;
+      }
+
+      .donations .memo {
+        font-style: italic;
+        color: #666;
+      }
+
+      .summary table {
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        font-size: 0.8em;
+        border: 1px solid #999;
+      }
+
+      .summary td {
+        border-top: none;
+        border-bottom: none;
+      }
+
+      .summary td.header {
+        background: #bbb;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        margin: 2px;
+      }
+
+      .summary td.sub-header {
+        background: #ddd;
+        font-weight: bold;
+        margin: 2px;
+      }
+
+  %body
+    %h1 Smoky Row Brethren Church | Giving Statement
+    %h4
+      Jan 1 2020 &ndash; Dec 31 2020
+      %span.normal-text{style: 'font-weight 400;'} (as of #{Date.today.strftime('%b %e %Y')})
+
+    .donor
+      %h2= @object.donor.name
+      %div= @object.donor.address1
+      - unless @object.donor.address1.blank?
+        %div= @object.donor.address2
+      %div #{@object.donor.city} #{@object.donor.state} #{@object.donor.zip}
+
+    .grid-wrapper
+      .donations
+        %table
+          %thead
+            %tr
+              %th Date
+              %th Account
+              %th Method
+              %th Amount
+              %th Tax-Deductible
+          %tbody
+            - @object.donations.each_with_index do |donation, i|
+              %tr{class: (donation.has_memo? ? 'has-memo ' : '') + (i % 2 == 0 ? 'shaded' : '') }
+                %td
+                  %strong= donation.date.strftime('%b %e, %Y')
+                %td= donation.account
+                %td= donation.method
+                %td= number_to_currency(donation.amount)
+                %td= donation.tax_deductible ? 'X' : ''
+              - if donation.has_memo?
+                %tr{class: i % 2 == 0 ? 'shaded' : ''}
+                  %td
+                  %td{colspan: 3}
+                    .memo Memo: #{donation.memo}
+                  %td
+
+      .summary
+        %table
+          %tbody
+            %tr
+              %td.header{colspan: 2, style: 'font-size: 1.2em;'} OVERVIEW
+
+            - unless @object.tax_deductible_accounts.empty?
+              %tr
+                %td.sub-header{colspan: 2} TAX-DEDUCTIBLE
+              - @object.tax_deductible_accounts.each do |acct|
+                %tr
+                  %td{style: 'padding: 4px;'}= acct
+                  %td{style: 'padding: 4px; text-align: right;'}= number_to_currency(@object.donations.filter{|d| d.tax_deductible && d.account == acct}.sum(&:amount))
+              %tr
+                %td{colspan:2, style: 'padding: 4px; border-top: 1px solid #ccc; text-align: right;'}
+                  = number_to_currency(@object.donations.filter{|d| d.tax_deductible}.sum(&:amount))
+
+            - unless @object.non_tax_deductible_accounts.empty?
+              %tr
+                %td.sub-header{colspan: 2} NON TAX-DEDUCTIBLE
+              - @object.non_tax_deductible_accounts.each do |acct|
+                %tr
+                  %td{style: 'padding: 4px;'}= acct
+                  %td{style: 'padding: 4px; text-align: right;'}= number_to_currency(@object.donations.filter{|d| !d.tax_deductible && d.account == acct}.sum(&:amount))
+              %tr
+                %td{colspan: 2, style: 'padding: 4px; border-top: 1px solid #ccc; text-align: right;'}
+                  = number_to_currency(@object.donations.filter{|d| !d.tax_deductible}.sum(&:amount))
+
+            %tr
+              %td.sub-header{colspan: 2} TOTAL AMOUNT
+            %tr
+              %td{colspan: 2, style: 'padding: 4px; text-align: right;'}
+                %strong= number_to_currency(@object.donations.sum(&:amount))
+
+    %footer{style: 'position: absolute; bottom: 0'}
+      %p
+        Thank you for your generous giving!<br/>
+        No goods or services were provided in exchange for tax-deductible contributions.
+      %p
+        %strong Smoky Row Brethren Church<br/>
+        7260 Smoky Row Rd<br/>
+        Columbus OH 43235

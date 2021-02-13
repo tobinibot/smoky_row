@@ -20,5 +20,7 @@
               %a.nav-link{class: current_page?(donors_path) ? 'active' : '', href: donors_path, "aria-current" => current_page?(donors_path) ? 'page' : nil} Donors
             %li.nav-item
               %a.nav-link{class: current_page?(donations_path) ? 'active' : '', href: donations_path, "aria-current" => current_page?(donations_path) ? 'page' : nil} Donations
+            %li.nav-item
+              %a.nav-link{class: current_page?(statements_index_path) ? 'active' : '', href: statements_index_path, "aria-current" => current_page?(statements_index_path) ? 'page' : nil} Statements
     .container-lg
       = yield
