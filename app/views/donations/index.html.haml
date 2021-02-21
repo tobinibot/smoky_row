@@ -17,6 +17,7 @@
             %th Amount
             %th Account
             %th Tax Deductible
+            %th Review
             %th
 
         %tbody
@@ -28,6 +29,9 @@
               %td= donation.account
               %td
                 - if donation.tax_deductible
+                  %i.bi.bi-check
+              %td
+                - if donation.needs_review
                   %i.bi.bi-check
               %td{style: 'text-align: right'}
                 %a.btn.btn-outline-primary.btn-sm{href: edit_donation_path(donation)} Edit

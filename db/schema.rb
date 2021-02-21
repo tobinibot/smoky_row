@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_31_171734) do
+ActiveRecord::Schema.define(version: 2021_02_21_220850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2021_01_31_171734) do
     t.text "memo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "needs_review", default: false, null: false
+    t.text "notes"
     t.index ["donor_id"], name: "index_donations_on_donor_id"
   end
 

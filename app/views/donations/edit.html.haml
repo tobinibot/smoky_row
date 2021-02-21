@@ -36,8 +36,20 @@
 
     .row.mb-3
       .col
+        .mb-3
+          .form-check.form-switch
+            = f.check_box :tax_deductible, class: 'form-check-input'
+            = f.label :tax_deductible, "This donation is tax deductible", class: 'form-check-label'
+
+        -#.mb-3
         .form-check.form-switch
-          = f.check_box :tax_deductible, class: 'form-check-input'
-          = f.label :tax_deductible, "This donation is tax deductible", class: 'form-check-label'
+          = f.check_box :needs_review, class: 'form-check-input'
+          = f.label :needs_review, "This donation needs review", class: 'form-check-label'
+          .form-text Flip this if there’s something you’d like to come back and check on in the future
+
+      .col
+        .form-floating
+          = f.text_area :notes, class: 'form-control', placeholder: 'Notes', style: 'height: 100px;'
+          = f.label :notes, class: 'form-label'
 
     = f.submit 'Save' , class: 'btn btn-primary'

@@ -10,6 +10,7 @@
           = f.date_field :date, value: Date.today, class: 'form-control', placeholder: 'Date'
           = f.label :date, class: 'form-label'
       .col-8
+        -#%input#donor-auto-complete.autocomplete
         .form-floating
           = f.select :donor_id, options_for_select(@donors), {include_blank: true}, class: 'form-select', placeholder: 'Donor'
           = f.label :donor_id, class: 'form-label'
@@ -36,8 +37,31 @@
 
     .row.mb-3
       .col
+        .mb-3
+          .form-check.form-switch
+            = f.check_box :tax_deductible, class: 'form-check-input', checked: true
+            = f.label :tax_deductible, "This donation is tax deductible", class: 'form-check-label'
+
+        -#.mb-3
         .form-check.form-switch
-          = f.check_box :tax_deductible, class: 'form-check-input'
-          = f.label :tax_deductible, "This donation is tax deductible", class: 'form-check-label'
+          = f.check_box :needs_review, class: 'form-check-input'
+          = f.label :needs_review, "This donation needs review", class: 'form-check-label'
+          .form-text Flip this if there’s something you’d like to come back and check on in the future
+
+      .col
+        .form-floating
+          = f.text_area :notes, class: 'form-control', placeholder: 'Notes', style: 'height: 100px;'
+          = f.label :notes, class: 'form-label'
+
+    -#.row.mb-3
+    -#  .col
+    -#    %label.form-label{for: 'xxx'} City
+    -#    %input.form-control#xxx{list: "datalistOptions"}
+    -#    %datalist#datalistOptions
+    -#      %option{value: "San Francisco"}
+    -#      %option{value: "New York"}
+    -#      %option{value: "Seattle"}
+    -#      %option{value: "Los Angeles"}
+    -#      %option{value: "Chicago"}
 
     = f.submit 'Save' , class: 'btn btn-primary'
