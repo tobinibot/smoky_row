@@ -15,8 +15,10 @@ import '@popperjs/core'
 import 'bootstrap'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
-import './app'
+import '@tarekraafat/autocomplete.js'
 
+import './init_bootstrap'
+import './init_autocompletes'
 
 Rails.start()
 Turbolinks.start()

@@ -902,6 +902,11 @@
     webpack-cli "^3.3.12"
     webpack-sources "^1.4.3"
 
+"@tarekraafat/autocomplete.js@^8.3.1":
+  version "8.3.1"
+  resolved "https://registry.yarnpkg.com/@tarekraafat/autocomplete.js/-/autocomplete.js-8.3.1.tgz#4c8f557f150785f89136bd3bb548ca9b41f16b5e"
+  integrity sha512-5LEw+OlFMVG/Jk/96XIZIOE5BNYoaoq8Gxv4kh7Jt5tPPF3AY45OKxIG9Wd+2jXus3ixS8vn4Crcg0ZzHldWMQ==
+
 "@types/glob@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.3.tgz#e6ba80f36b7daad2c685acd9266382e68985c183"
