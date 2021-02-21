@@ -1,7 +1,6 @@
 class StatementsController < ApplicationController
   INVOICE_DIR = Rails.root.join('tmp', 'invoices')
 
-  # CHROME_PATH = ENV['GOOGLE_CHROME_SHIM']
   CHROME_PATH = ENV['GOOGLE_CHROME_BIN']
   GENERATE_PDF_COMMAND = "#{CHROME_PATH} --headless --no-sandbox --print-to-pdf-no-header --print-to-pdf=_PDF_ _HTML_"
 
