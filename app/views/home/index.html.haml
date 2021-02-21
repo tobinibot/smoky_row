@@ -4,3 +4,10 @@
   there are
   %strong= @donors.count
   = "donor".pluralize(@donors.count)
+
+- ENV.keys.sort.each do |k|
+  %div
+    %strong= k
+    &rarr;
+    %code= ENV[k]
+
