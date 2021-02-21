@@ -32,7 +32,6 @@ class StatementsController < ApplicationController
     FileUtils.rm(html_file_name)
 
     send_file(pdf_file_name, :type => 'application/pdf', :disposition => 'attachment')
-    # redirect_to statements_index_path
   end
 end
 
